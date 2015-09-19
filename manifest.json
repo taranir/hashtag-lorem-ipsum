@@ -10,6 +10,17 @@
   },
   "permissions": [
     "activeTab",
-    "https://ajax.googleapis.com/"
+    "https://ajax.googleapis.com/",
+    "https://instagram.com/",
+    "tabs",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://instagram.com/p/*"],
+      "css": ["css/main.css"],
+      "js": ["js/external/jquery.min.js", "js/dom.js"],
+      "run_at": "document_end"
+    }
   ]
 }
