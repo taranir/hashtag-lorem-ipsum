@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+
+  "name": "#loremipsum",
+  "description": "Generate kool hashtags for your Instagram uploads",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
