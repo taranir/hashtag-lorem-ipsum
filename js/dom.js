@@ -24,6 +24,10 @@ var dumbTags = {
   "people": true,
   "group": true,
   "one": true,
+  "two": true,
+  "three": true,
+  "four": true,
+  "five": true,
   "page": true,
   "dark": true,
   "stilllife": true,
@@ -34,7 +38,13 @@ var dumbTags = {
   "portrait": true,
   "facialexpression": true,
   "building": true,
-  "young": true
+  "young": true,
+  "mammal": true,
+  "affection": true,
+  "contemporary": true,
+  "isolated": true,
+  "work": true,
+  "background": true
 };
 
 

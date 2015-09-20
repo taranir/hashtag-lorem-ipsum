@@ -35,7 +35,7 @@ function InstagramClient() {
           var mostCommonHashtags = client.getMostCommonHashtags(allHashtags);
           var result = _.difference(mostCommonHashtags, tags);
           result.reverse();
-          result = _.slice(result, -30);
+          result = _.slice(result, 0, 31);
           result = client.processHashtagList(result);
           resolve(result);
         });
