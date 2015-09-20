@@ -19,7 +19,6 @@ function buttonExists() {
 }
 
 function injectButton() {
-  var hashtagList = ["dog", "cute", "adorbs", "cutenessoverload"];
   var hashtagButton = $("<div/>");
   hashtagButton
     .addClass("hashtag-button")
@@ -30,7 +29,7 @@ function injectButton() {
     console.log("clicked");
     var commentBox = $(e.target).parent()
       .find(".-cx-PRIVATE-PostInfo__commentCreatorInput");
-    var imageLink = instaClient.getImageLink(e.target);
+    var imageLink = instaClient.getImageLink($(e.target));
     var imageURLPromise = instaClient.getImageURL(imageLink)
       .then(function(imageURL) {
         var tagsPromise = clClient.getTags(imageURL);
