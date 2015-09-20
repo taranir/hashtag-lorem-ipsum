@@ -72,7 +72,6 @@ function InstagramClient() {
         });
       });
     return photosPromise;
-
   }
 
   client.getHashtagsFromPhotos = function(photos) {

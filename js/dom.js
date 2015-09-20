@@ -33,7 +33,8 @@ var dumbTags = {
   "set": true,
   "portrait": true,
   "facialexpression": true,
-  "building": true
+  "building": true,
+  "young": true
 };
 
 
