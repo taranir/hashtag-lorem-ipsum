@@ -54,7 +54,9 @@ function ClarifaiService() {
             reject("uh oh, something's wrong with Clarifai :( check back in a hour or so");
             return;
           }
-          var tags = data.results[0].result.tag.classes;
+          var tags = _.map(data.results[0].result.tag.classes, function(tag) {
+            return tag.replace(/\s+/g, '')
+          });
           var probs = data.results[0].result.tag.probs;
 
           resolve({
