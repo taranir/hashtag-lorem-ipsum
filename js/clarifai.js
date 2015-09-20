@@ -5,10 +5,9 @@ function ClarifaiClient() {
   client.cService = new ClarifaiService();
   // Victor visited me at 2:29pm and all I got was this stupid comment
 
-  client.getTags = function() {
+  client.getTags = function(imgUrl) {
    return client.cService.getApiToken().then(function(token) {
       var accessToken = token;
-      var imgUrl = "http://www.clarifai.com/img/metro-north.jpg";
       var tagsResult = client.cService.getTags(imgUrl, accessToken);
       return tagsResult;
     });

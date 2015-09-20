@@ -30,15 +30,19 @@ function injectButton() {
     console.log("clicked");
     var commentBox = $(e.target).parent()
       .find(".-cx-PRIVATE-PostInfo__commentCreatorInput");
-    var tagsPromise = clClient.getTags();
-    tagsPromise.then(function(tags) {
-      console.log("tags", tags);
-      instaClient.getHashtags(tags).then(function(result) {
-        console.log("hashtag result", result);
-        commentBox.val(result);
+    var imageLink = instaClient.getImageLink(e.target);
+    var imageURLPromise = instaClient.getImageURL(imageLink)
+      .then(function(imageURL) {
+        var tagsPromise = clClient.getTags(imageURL);
+        tagsPromise.then(function(tags) {
+          console.log("tags", tags);
+          instaClient.getHashtags(tags).then(function(result) {
+            console.log("hashtag result", result);
+            commentBox.val(result);
+          });
+        });
       });
-    });
-
+    
   });
   $(".-cx-PRIVATE-PostInfo__commentCreator").after(hashtagButton);
 }

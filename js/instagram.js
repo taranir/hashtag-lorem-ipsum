@@ -2,6 +2,30 @@ function InstagramClient() {
   var client = this;
   client.instaService = new InstagramService();
 
+  client.getImageLink = function(likeButton) {
+  var relativeURL = $(likeButton).parents(".-cx-PRIVATE-PostPage__post")
+    .find(".-cx-PRIVATE-PostInfo__timestamp").attr("href");
+  return "http://instagram.com" + relativeURL;
+  }
+
+  client.getImageURL = function(imageLink) {
+    var promise = new Promise(
+      function(resolve, reject) {
+        client.instaService.getMediaID(imageLink)
+          .then(function(data) {
+            var mediaID = data["media_id"];
+            var promise = new Promise(
+              function(resolve, reject) {
+                client.instaService.getImageURL(mediaID)
+                  .then(function(data) {
+                    resolve(data.data.images.standard_resolution.url);
+                  });
+              });
+            resolve(promise);
+          });
+      });
+    return promise;
+  }
 
   client.getHashtags = function(tags) {
     var allHashtagsPromise = client.getAllHashtags(tags);
@@ -105,7 +129,8 @@ function InstagramService() {
           },
           error: function(jqXHR, status, error) {
             console.log(error);
-          }
+          },
+          dataType: "json"
         });
   };
 
@@ -126,4 +151,14 @@ function InstagramService() {
     }
     return [];
   };
+
+  serv.getMediaID = function(imageLink) {
+    var url = "https://api.instagram.com/publicapi/oembed/?url=" + imageLink;
+    return serv.ajaxGet(url);
+  }
+
+  serv.getImageURL = function(mediaID) {
+    var url = "https://api.instagram.com/v1/media/" + mediaID + "?client_id=" + serv.clientID;
+    return serv.ajaxGet(url);
+  }
 }
