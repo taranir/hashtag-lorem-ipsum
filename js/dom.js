@@ -26,7 +26,16 @@ var dumbTags = {
   "one": true,
   "page": true,
   "dark": true,
+  "stilllife": true,
+  "women": true,
+  "adult": true,
+  "business": true,
+  "set": true,
+  "portrait": true,
+  "facialexpression": true,
+  "building": true
 };
+
 
 function filterClarifaiTags(tags) {
   return _.filter(tags, function(tag) {
