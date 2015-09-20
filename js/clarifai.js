@@ -1,6 +1,24 @@
-var getClarifaiTags = function(imgUrl) {
+console.log("clarifai");
+
+function ClarifaiClient() {
+  var client = this;
+  client.cService = new ClarifaiService();
   // Victor visited me at 2:29pm and all I got was this stupid comment
-  var getApiToken = function() {
+
+  client.getTags = function() {
+   return client.cService.getApiToken().then(function(token) {
+      var accessToken = token;
+      var imgUrl = "http://www.clarifai.com/img/metro-north.jpg";
+      var tagsResult = client.cService.getTags(imgUrl, accessToken);
+      return tagsResult;
+    });
+  }
+}
+
+function ClarifaiService() {
+  var service = this;
+
+  service.getApiToken = function() {
     var data = {
       grant_type: "client_credentials",
       client_id: "mSW-BldBZRMsbfpJC-Hb-pzwjrSsOTPpMjng1iTK",
@@ -20,11 +38,10 @@ var getClarifaiTags = function(imgUrl) {
         }
       });
     });
-
     return tokenPromise;
   }
 
-  var clarifai = function(imgUrl, accessToken) {
+  service.getTags = function(imgUrl, accessToken) {
     var url = "https://api.clarifai.com/v1/tag/?url=" + imgUrl;
     var tagsPromise = new Promise(function(resolve, reject) {
       $.ajax({
@@ -49,15 +66,7 @@ var getClarifaiTags = function(imgUrl) {
         }
       });
     });
-
-    return tagsPromise
+    return tagsPromise;
   }
+}
 
-  return getApiToken().then(function(token) {
-    var accessToken = token;
-    return clarifai(imgUrl, accessToken);
-  }).catch(function(error) {
-    console.log("oh noes :(, there was an error - ", error);
-  });
-
-};
