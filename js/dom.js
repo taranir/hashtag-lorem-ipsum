@@ -35,8 +35,8 @@ function injectButton() {
       .then(function(imageURL) {
         var tagsPromise = clClient.getTags(imageURL);
         tagsPromise.then(function(tags) {
-          console.log("tags", tags);
-          instaClient.getHashtags(tags).then(function(result) {
+          console.log("tags", tags.tags);
+          instaClient.getHashtags(tags.tags).then(function(result) {
             console.log("hashtag result", result);
             commentBox.val(result);
           });
