@@ -18,6 +18,12 @@ function buttonExists() {
   return buttonArray.length > 0;
 }
 
+function filterClarifaiTags(tags) {
+  return _.filter(tags, function(tag) {
+    return tag !== "nobody";
+  });
+}
+
 function injectButton() {
   var hashtagButton = $("<div/>");
   hashtagButton
@@ -34,8 +40,14 @@ function injectButton() {
       .then(function(imageURL) {
         var tagsPromise = clClient.getTags(imageURL);
         tagsPromise.then(function(tags) {
-          console.log("tags", tags.tags);
-          instaClient.getHashtags(tags.tags).then(function(result) {
+          var cTags = tags.tags;
+          console.log("tags", cTags);
+          if (cTags.length > 5) {
+            cTags = filterClarifaiTags(cTags);
+            cTags = _.slice(cTags, 0, 6);
+          }
+          console.log("sliced tags", cTags);
+          instaClient.getHashtags(cTags).then(function(result) {
             console.log("hashtag result", result);
             commentBox.val(result);
           });

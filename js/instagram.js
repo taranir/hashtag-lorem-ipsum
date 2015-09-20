@@ -107,6 +107,7 @@ function InstagramClient() {
     var frequencyTable = _.countBy(hashtags, function(hashtag) {
       return hashtag;
     });
+    console.log(frequencyTable);
     var sortedHashtags = _.sortBy(Object.keys(frequencyTable), function(hashtag) {
       return frequencyTable[hashtag];
     })
