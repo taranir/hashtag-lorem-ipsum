@@ -8,7 +8,7 @@
   "permissions": [
     "activeTab",
     "https://ajax.googleapis.com/",
-    "https://instagram.com/",
+    "https://api.instagram.com/",
     "tabs",
     "unlimitedStorage"
   ],
@@ -17,7 +17,12 @@
     {
       "matches": ["*://instagram.com/*"],
       "css": ["css/main.css"],
-      "js": ["js/external/jquery.min.js", "js/dom.js"],
+      "js": [
+        "js/external/jquery.min.js",
+        "js/external/lodash.js",
+        "js/clarifai.js",
+        "js/instagram.js",
+        "js/dom.js"],
       "run_at": "document_end"
     }
   ],
