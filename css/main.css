@@ -1,8 +1,19 @@
 .hashtag-button {
 	width: 28px;
-	margin-right: 10px;
+	margin-right: 14px;
 	height: 44px;
 	cursor: pointer;
 	background-position: center;
 	background-repeat: no-repeat;
+}
+
+.hashtag-button:hover {
+	-webkit-animation: wiggle 0.3s ease-out 1;
+}
+
+@keyframes wiggle {
+	0% {-webkit-transform: rotate(0deg); }
+	30% {-webkit-transform: rotate(-20deg); }
+	60% {-webkit-transform: rotate(20deg); }
+	100% {-webkit-transform: rotate(0deg); }
 }

@@ -1,6 +1,22 @@
 console.log("dom!");
+injectButton();
 
-(function() {
+$(document).ready(function() {
+	$('body').on('click', function() {
+		setTimeout(function() {
+			if (!buttonExists()) {
+				injectButton();
+			}
+		}, 500);
+	});
+});
+
+function buttonExists() {
+	var buttonArray = $(".-cx-PRIVATE-PostInfo__commentCreator").next(".hashtag-button");
+	return buttonArray.length > 0;
+}
+
+function injectButton() {
 	var hashtagList = ["dog", "cute", "adorbs", "cutenessoverload"];
 	var hashtagButton = $("<div/>");
 	hashtagButton
@@ -14,6 +30,5 @@ console.log("dom!");
 			.find(".-cx-PRIVATE-PostInfo__commentCreatorInput")
 			.val("stuff");
 	});
-
-	$(".-cx-PRIVATE-PostInfo__likeButton").after(hashtagButton);
-})();
+	$(".-cx-PRIVATE-PostInfo__commentCreator").after(hashtagButton);
+}
