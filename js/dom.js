@@ -32,8 +32,8 @@ function injectButton() {
       .find(".-cx-PRIVATE-PostInfo__commentCreatorInput");
     var tagsPromise = clClient.getTags();
     tagsPromise.then(function(tags) {
-      console.log("tags", tags);
-      instaClient.getHashtags(tags).then(function(result) {
+      console.log("tags", tags.tags);
+      instaClient.getHashtags(tags.tags).then(function(result) {
         console.log("hashtag result", result);
         commentBox.val(result);
       });

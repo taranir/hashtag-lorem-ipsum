@@ -6,7 +6,7 @@ function ClarifaiClient() {
   // Victor visited me at 2:29pm and all I got was this stupid comment
 
   client.getTags = function() {
-   return client.cService.getApiToken().then(function(token) {
+    return client.cService.getApiToken().then(function(token) {
       var accessToken = token;
       var imgUrl = "http://www.clarifai.com/img/metro-north.jpg";
       var tagsResult = client.cService.getTags(imgUrl, accessToken);
@@ -55,7 +55,14 @@ function ClarifaiService() {
             reject("uh oh, something's wrong with Clarifai :( check back in a hour or so");
             return;
           }
-          resolve(data.results[0].result.tag.classes);
+          var tags = data.results[0].result.tag.classes;
+          var probs = data.results[0].result.tag.probs;
+
+          resolve({
+            tags: tags,
+            probs: probs
+          });
+
         },
         error: function(err) {
           if (err.status === 400) {
