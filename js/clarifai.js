@@ -5,6 +5,7 @@ function ClarifaiClient() {
   client.cService = new ClarifaiService();
   // Victor visited me at 2:29pm and all I got was this stupid comment
 
+  // get the Clarifai tags associated with an image
   client.getTags = function(imgUrl) {
     return client.cService.getApiToken().then(function(token) {
       var accessToken = token;
@@ -17,6 +18,7 @@ function ClarifaiClient() {
 function ClarifaiService() {
   var service = this;
 
+  // get the API Token, required to authenticate every subsequent request
   service.getApiToken = function() {
     var data = {
       grant_type: "client_credentials",
@@ -24,6 +26,7 @@ function ClarifaiService() {
       client_secret: "_d-0hn98HW1QlWb65sBvTrE-rAbIDbYoOhvGrKwY"
     };
 
+    // send the POST request for API token
     var tokenPromise = new Promise(function(resolve, reject) {
       $.ajax({
         method: "POST",
@@ -40,8 +43,12 @@ function ClarifaiService() {
     return tokenPromise;
   }
 
+  // send the GET request for the image tags to Clarifai API
   service.getTags = function(imgUrl, accessToken) {
+    // construct the URL
     var url = "https://api.clarifai.com/v1/tag/?url=" + imgUrl;
+
+    // send the GET request
     var tagsPromise = new Promise(function(resolve, reject) {
       $.ajax({
         method: "GET",
@@ -54,6 +61,8 @@ function ClarifaiService() {
             reject("uh oh, something's wrong with Clarifai :( check back in a hour or so");
             return;
           }
+
+          // strip out spaces because Instagram hates spaces
           var tags = _.map(data.results[0].result.tag.classes, function(tag) {
             return tag.replace(/\s+/g, '')
           });
