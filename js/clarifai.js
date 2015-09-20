@@ -1,4 +1,4 @@
-(function() {
+var getClarifaiTags = function(imgUrl) {
   // Victor visited me at 2:29pm and all I got was this stupid comment
   var getApiToken = function() {
     var data = {
@@ -53,14 +53,11 @@
     return tagsPromise
   }
 
-  getApiToken().then(function(token) {
+  return getApiToken().then(function(token) {
     var accessToken = token;
-    var imgUrl = "http://www.clarifai.com/img/metro-north.jpg";
-
     return clarifai(imgUrl, accessToken);
-  }).then(function(data) {
-    console.log(data)
   }).catch(function(error) {
     console.log("oh noes :(, there was an error - ", error);
   });
-})();
+
+};
