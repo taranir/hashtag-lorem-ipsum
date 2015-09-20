@@ -18,9 +18,23 @@ function buttonExists() {
   return buttonArray.length > 0;
 }
 
+var dumbTags = {
+  "nobody": true,
+  "men": true,
+  "people": true,
+  "group": true,
+  "one": true,
+  "page": true,
+  "dark": true,
+};
+
 function filterClarifaiTags(tags) {
   return _.filter(tags, function(tag) {
-    return tag !== "nobody";
+    if (dumbTags[tag]) {
+      return false;
+    } else {
+      return true;
+    }
   });
 }
 

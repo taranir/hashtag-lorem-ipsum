@@ -3,7 +3,7 @@ function InstagramClient() {
   client.instaService = new InstagramService();
 
   client.getImageLink = function(hashtagButton) {
-  var relativeURL = $(hashtagButton).parents(".-cx-PRIVATE-PostPage__post,.-cx-PRIVATE-FeedPage__post")
+  var relativeURL = $(hashtagButton).parents(".-cx-PRIVATE-PostPage__post,.-cx-PRIVATE-FeedPage__post,.-cx-PRIVATE-Post__flexible735")
     .find(".-cx-PRIVATE-PostInfo__timestamp,.-cx-PRIVATE-Post__timestamp").attr("href");
   return "http://instagram.com" + relativeURL;
   }
