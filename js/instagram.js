@@ -99,7 +99,7 @@ function InstagramClient() {
 
   // filter out hashtags we don't want (ie too short)
   client.hashtagFilter = function(hashtag) {
-    return hashtag.length > 2 && hashtag !== "gay" && hashtag !== "black" && hashtag.charAt(0).match(/^[a-z0-9]+$/i);
+    return hashtag.length > 2 && hashtag.charAt(0).match(/^[a-z0-9]+$/i);
   }
 
   client.getMostCommonHashtags = function(hashtags) {
