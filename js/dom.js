@@ -66,7 +66,6 @@ function injectButton() {
     .attr("title", "Generate hashtags!");
 
   hashtagButton.on('click', function(e) {
-    console.log("clicked");
     var commentBox = $(e.target).parent()
       .find(".-cx-PRIVATE-PostInfo__commentCreatorInput");
     var imageLink = instaClient.getImageLink($(e.target));
@@ -75,14 +74,11 @@ function injectButton() {
         var tagsPromise = clClient.getTags(imageURL);
         tagsPromise.then(function(tags) {
           var cTags = tags.tags;
-          console.log("tags", cTags);
           if (cTags.length > 5) {
             cTags = filterClarifaiTags(cTags);
             cTags = _.slice(cTags, 0, 6);
           }
-          console.log("sliced tags", cTags);
           instaClient.getHashtags(cTags).then(function(result) {
-            console.log("hashtag result", result);
             commentBox.val(result);
           });
         });
